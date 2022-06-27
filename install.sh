@@ -1,6 +1,6 @@
 #!/bin/env bash
 
-set -echo
+set -e
 
 read -r -p "This script requires root permissions, please acknowledge that it is being run as root. [y|n]: "
 

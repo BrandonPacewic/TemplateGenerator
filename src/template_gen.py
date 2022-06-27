@@ -12,6 +12,7 @@ class Colors:
     GREEN = '\033[92m'
     RED = '\033[91m'
 
+
 def make_alphabet(template: str, times: int) -> None:
     for i in range(times):
         os.system(f"cp {TEMPLATES}{template} {ALPHABET[i]}.cpp")
