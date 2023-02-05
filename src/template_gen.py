@@ -1,41 +1,41 @@
-#! /usr/bin/python3
+# Copyright (c) Brandon Pacewic
+# SPDX-License-Identifier: MIT
 
-import sys
 import os
 
 ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-TEMPLATES = '~/Templates/'
-CODE_FORCES = 'codeForces.cpp'
-GOOGLE_CODE_JAM = 'googleCodeJam.cpp'
 
-class Colors:
-    GREEN = '\033[92m'
-    RED = '\033[91m'
+def get_templates():
+    while True:
+        if os.path.exists('templates'):
+            templates = [os.path.join('templates', f) for f in os.listdir('templates')]
+            break
 
+        os.chdir('../')
 
-def make_alphabet(template: str, times: int) -> None:
-    for i in range(times):
-        os.system(f"cp {TEMPLATES}{template} {ALPHABET[i]}.cpp")
+    return templates
 
 
-def get_template(template: str) -> str:
-    if template == "forces":
-        return CODE_FORCES
-    elif template == "google":
-        return GOOGLE_CODE_JAM
-    else:
-        return None
+def user_select_template(templates):
+    for i, template in enumerate(templates):
+        print(f'{i + 1}: {template.split(os.sep)[-1]}')
+
+    return templates[int(input('Enter the number of the template you want to use: ')) - 1]
 
 
 def main():
-    template = get_template(sys.argv[1])
-    try:
-        option = int(sys.argv[2])
-        make_alphabet(template, option)
-    except ValueError:
-        os.system(f"cp {TEMPLATES}{template} {sys.argv[2]}")
+    start_directory = os.getcwd() + os.sep
+    templates = get_templates()
+    template = user_select_template(templates)
+    generation_option = input('Count or Name [c/n]: ').lower()
 
-    print(f"{Colors.GREEN}[FINISHED]")
+    if generation_option == 'c':
+        count = int(input('How many files do you want to generate: '))
+        for i in range(count):
+            os.system(f'copy {template} {start_directory}{ALPHABET[i]}.{template.split(".")[-1]}')
+    else:
+        name = input('What do you want to name the file: ')
+        os.system(f'copy {template} {start_directory}{name}.{template.split(".")[-1]}')
 
 
 if __name__ == '__main__':

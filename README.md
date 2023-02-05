@@ -1,3 +1,9 @@
 # Template Generator
 
-Basic linux script for generating my competitive coding template files.
+TODO: Rewrite `README.md`.
+
+## License
+
+Copyright (c) Brandon Pacewic
+
+SPDX-License-Identifier: MIT
