@@ -1,1 +1,5 @@
+# Copyright (c) Brandon Pacewic
+# SPDX-License-Identifier: MIT
+
 __pycache__/
+*.cmd

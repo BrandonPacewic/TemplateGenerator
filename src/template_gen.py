@@ -5,7 +5,9 @@ import os
 
 ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-def get_templates():
+def main():
+    start_directory = os.getcwd() + os.sep
+    
     while True:
         if os.path.exists('templates'):
             templates = [os.path.join('templates', f) for f in os.listdir('templates')]
@@ -13,20 +15,10 @@ def get_templates():
 
         os.chdir('../')
 
-    return templates
-
-
-def user_select_template(templates):
     for i, template in enumerate(templates):
         print(f'{i + 1}: {template.split(os.sep)[-1]}')
 
-    return templates[int(input('Enter the number of the template you want to use: ')) - 1]
-
-
-def main():
-    start_directory = os.getcwd() + os.sep
-    templates = get_templates()
-    template = user_select_template(templates)
+    template = templates[int(input('Enter the number of the template you want to use: ')) - 1]
     generation_option = input('Count or Name [c/n]: ').lower()
 
     if generation_option == 'c':
